@@ -7,6 +7,7 @@ function App() {
 
   const [country, setCountry] = useState([]);
   const [flagCountry, setFlagCountry] = useState({});
+  const [score, setScore] = useState({ total: 0, correct: 0, incorrect: 0 });
 
   const generateRandomNations = () => {
     let ct = [];
@@ -22,9 +23,9 @@ function App() {
 
   const checkAnswer = (c) => {
     if (c.name === flagCountry.name) {
-      alert('Correct Answer');
+      setScore({ ...score, correct: score.correct+1, total: score.total+1 })
     } else {
-      alert('Incorrect');
+      setScore({ ...score, incorrect: score.incorrect+1, total: score.total+1 })
     }
     generateRandomNations();
   }
@@ -35,6 +36,10 @@ function App() {
 
   return (
     <div className="App">
+      <div>
+        <h4>Total : {score.total}/ Correct: {score.correct}/ Incorrect: {score.incorrect}
+        </h4>
+      </div>
       {flagCountry.name ? (
         <span className={`flag-icon flag-icon-${flagCountry['alpha-2'].toLowerCase()}`}>
 
