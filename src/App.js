@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+
+import nations from './nations'
+import '../node_modules/flag-icon-css/css/flag-icons.css';
 import './App.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
+
+  const [country, setCountry] = useState([]);
+  const generateRandomNations = () => {
+    let ct = [];
+    for (let i = 0; i < 4; i++) {
+      const r = Math.floor(Math.random() * nations.length);
+      ct.push(nations[r]);
+    }
+    console.log(country);
+    setCountry(ct);
+  }
+  useEffect(() => {
+    generateRandomNations();
+
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <span className="flag-icon flag-icon-gr"></span>
+      <div>{
+        country.map(c => <button key={c.alpha2Code}>{c.name}</button>)}</div>
     </div>
   );
 }
-
 export default App;
