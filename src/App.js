@@ -9,6 +9,7 @@ function App() {
   const [flagCountry, setFlagCountry] = useState({});
   const [score, setScore] = useState({ total: 0, correct: 0, incorrect: 0 });
   const [showAnswer, setShowAnswer] = useState(false);
+  const [selected, setSelected] = useState({});
 
   const generateRandomNations = () => {
     let ct = [];
@@ -22,8 +23,9 @@ function App() {
     setFlagCountry(ct[index]);
   };
 
-  const checkAnswer = (c) => {
-    if (c.name === flagCountry.name) {
+  const checkAnswer = (country) => {
+    setSelected(country);
+    if (country.name === flagCountry.name) {
       setScore({ ...score, correct: score.correct + 1, total: score.total + 1 })
     } else {
       setScore({ ...score, incorrect: score.incorrect + 1, total: score.total + 1 })
@@ -32,7 +34,7 @@ function App() {
     setTimeout(() => {
       setShowAnswer(false);
       nextQuestion();
-    }, 3000)
+    }, 2000)
 
   };
   const nextQuestion = () => {
@@ -62,7 +64,13 @@ function App() {
         }
       </div>
       <div>
-        {showAnswer ? <h2>Correct Option : {flagCountry.name}</h2> : null}
+        {showAnswer ? (<h2 className={
+          flagCountry.name === selected.name ? 'correct' : 'incorrect'
+        }
+        >
+          Correct : {flagCountry.name}
+        </h2>
+        ) : null}
       </div>
     </div>
   );
