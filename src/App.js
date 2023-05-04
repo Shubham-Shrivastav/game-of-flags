@@ -1,4 +1,4 @@
-import nations from './nations'
+import nations from './nations';
 import '../node_modules/flag-icon-css/css/flag-icons.css';
 import './App.css';
 import { useState, useEffect } from 'react';
@@ -56,7 +56,7 @@ function App() {
 
         </span>) : null}
 
-      <div>
+      <div className="button-container">
         {
           country.map(c => <button key={c.name} onClick={() => checkAnswer(c)}>
             {c.name}
